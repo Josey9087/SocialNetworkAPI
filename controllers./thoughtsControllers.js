@@ -49,4 +49,13 @@ module.exports = {
         res.status(500).json(err);
       });
   },
+  deleteThought(req, res) {
+    Thoughts.findOneAndDelete({ _id: req.params.thoughtId })
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "Couldn't find this id!!" })
+          : res.json({ message: "Thought deleted!!" })
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 };
