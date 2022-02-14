@@ -1,5 +1,5 @@
 const { Schema, model, Types } = require("mongoose");
-const friends = require("./reactions");
+const friends = require("./Reactions");
 
 const validateEmail = function (email) {
   const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
