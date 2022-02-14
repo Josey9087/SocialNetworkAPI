@@ -15,5 +15,22 @@ module.exports = {
           : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
-  }
+  },
+  createThought(req, res) {
+    Thoughts.create(req.body)
+      .then((thoughts) => {
+        return User.findOneAndUpdate(
+          { _id: req.body.userId },
+          { $push: { thoughts: thoughts._id.toString() } },
+          { new: true }
+        );
+      })
+      .then((updateduser) => {
+        res.json(updateduser);
+    })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
 };
